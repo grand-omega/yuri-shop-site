@@ -13,9 +13,10 @@ leptos_router = { version = "0.8" }
 leptos_axum = { version = "0.8", optional = true }
 
 axum = { version = "0.8", optional = true }
-tokio = { version = "1", features = ["rt-multi-thread", "macros"], optional = true }
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "fs"], optional = true }
 tower = { version = "0.5", optional = true }
 tower-http = { version = "0.6", features = ["fs"], optional = true }
+sqlx = { version = "0.8", default-features = false, features = ["runtime-tokio", "sqlite"], optional = true }
 
 console_error_panic_hook = { version = "0.1", optional = true }
 wasm-bindgen = { version = "0.2", optional = true }
@@ -32,6 +33,7 @@ ssr = [
     "dep:tower",
     "dep:tower-http",
     "dep:leptos_axum",
+    "dep:sqlx",
     "leptos/ssr",
     "leptos_meta/ssr",
     "leptos_router/ssr",

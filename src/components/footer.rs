@@ -1,8 +1,14 @@
+use crate::api::newsletter::SubscribeNewsletter;
 use crate::content::FOOTER_NAV;
+use leptos::form::ActionForm;
 use leptos::prelude::*;
 
 #[component]
 pub fn Footer() -> impl IntoView {
+    let action = ServerAction::<SubscribeNewsletter>::new();
+    let pending = action.pending();
+    let value = action.value();
+
     view! {
         <footer class="bg-ink border-t border-rule">
             <div class="mx-auto max-w-[1480px] px-6 md:px-8 py-24 lg:py-32">
@@ -23,22 +29,35 @@ pub fn Footer() -> impl IntoView {
                         <p class="font-serif text-ivory text-lg max-w-[36ch]">
                             "Quattro lettere l'anno, scritte dall'atelier. Niente sconti, niente urgenza."
                         </p>
-                        <form class="flex flex-col sm:flex-row sm:items-end gap-4 mt-2">
+                        <ActionForm action=action attr:class="flex flex-col sm:flex-row sm:items-end gap-4 mt-2">
                             <label class="flex-1 flex flex-col gap-2">
                                 <span class="tracker text-stone">"Indirizzo email"</span>
                                 <input
                                     type="email"
+                                    name="email"
                                     required
                                     class="bg-transparent border-b border-rule focus:border-ivory outline-none py-2 text-ivory font-serif text-lg transition-colors duration-500"
                                 />
                             </label>
                             <button
                                 type="submit"
-                                class="tracker text-ivory pb-3 hover:text-oxblood transition-colors duration-500 text-left"
+                                disabled=move || pending.get()
+                                class="tracker text-ivory pb-3 hover:text-oxblood transition-colors duration-500 text-left disabled:opacity-50"
                             >
-                                "Iscriviti →"
+                                {move || if pending.get() { "Invio…" } else { "Iscriviti →" }}
                             </button>
-                        </form>
+                        </ActionForm>
+                        {move || match value.get() {
+                            Some(Ok(())) => view! {
+                                <p class="tracker text-stone mt-2">
+                                    "Grazie. Ti scriveremo dall'atelier."
+                                </p>
+                            }.into_any(),
+                            Some(Err(e)) => view! {
+                                <p class="tracker text-oxblood mt-2">{e.to_string()}</p>
+                            }.into_any(),
+                            None => ().into_any(),
+                        }}
                     </div>
 
                     <nav class="lg:col-span-3 lg:justify-self-end flex flex-col gap-3 tracker text-stone">
