@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+@source "../src/**/*.rs";
+
+@theme inline {
+  --color-ink: #0A0A0A;
+  --color-graphite: #1F1F1F;
+  --color-rule: #2A2A2A;
+  --color-ivory: #F5F1E8;
+  --color-cream: #EAE3D2;
+  --color-stone: #C9C0AB;
+  --color-oxblood: #5A1A1F;
+
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-serif: "EB Garamond", Georgia, serif;
+
+  --ease-omega: cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  background: var(--color-ink);
+  color: var(--color-ivory);
+  font-family: "EB Garamond", Georgia, serif;
+  font-feature-settings: "liga", "kern", "onum";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--color-oxblood);
+  color: var(--color-ivory);
+}
+
+.tracker {
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-size: 0.6875rem;
+  font-family: "EB Garamond", Georgia, serif;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 1.25rem, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes draw-x {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.rise {
+  opacity: 0;
+  animation: rise 900ms var(--ease-omega) forwards;
+}
+
+.draw-x {
+  transform: scaleX(0);
+  transform-origin: left center;
+  animation: draw-x 1400ms var(--ease-omega) forwards;
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fade-in 1200ms var(--ease-omega) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .rise,
+  .draw-x,
+  .fade-in {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
