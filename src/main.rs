@@ -36,15 +36,10 @@ async fn main() {
         .await
         .expect("connect sqlite");
 
-    sqlx::query(
-        "CREATE TABLE IF NOT EXISTS newsletter_subscribers (
-            email TEXT PRIMARY KEY NOT NULL,
-            subscribed_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
-        )",
-    )
-    .execute(&pool)
-    .await
-    .expect("create table");
+    sqlx::migrate!()
+        .run(&pool)
+        .await
+        .expect("run migrations");
 
     let app = Router::new()
         .leptos_routes_with_context(

@@ -1,8 +1,8 @@
-use crate::content::Spec;
+use crate::api::catalog::ProductSpec;
 use leptos::prelude::*;
 
 #[component]
-pub fn SpecItem(spec: Spec) -> impl IntoView {
+pub fn SpecItem(spec: ProductSpec) -> impl IntoView {
     view! {
         <div class="flex flex-col gap-3 py-8 px-2 border-b border-rule sm:[&:nth-child(2n)]:border-l lg:[&:nth-child(2n)]:border-l-0 lg:[&:not(:nth-child(3n+1))]:border-l border-rule">
             <dt class="tracker text-stone">{spec.label}</dt>

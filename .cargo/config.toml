@@ -1,0 +1,5 @@
+# Apple ld 1266.x asserts on long mangled symbol names produced by Leptos's
+# heavy generic machinery (server fns + Resource + Suspense). The v0 mangling
+# scheme keeps symbol strings short enough for the linker to accept.
+[build]
+rustflags = ["-C", "symbol-mangling-version=v0"]

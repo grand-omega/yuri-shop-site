@@ -20,18 +20,18 @@ pub fn Footer() -> impl IntoView {
                         <p class="font-serif text-stone leading-[1.6] max-w-[28ch]">
                             "Via Mazzini 14 · 37121 Verona · Italia"
                             <br/>
-                            "Lun–Ven 9–18 · Sabato su appuntamento"
+                            "Mon–Fri 9–18 · Saturday by appointment"
                         </p>
                     </div>
 
                     <div class="lg:col-span-5 flex flex-col gap-6">
-                        <p class="tracker text-stone">"Lettera dell'atelier"</p>
+                        <p class="tracker text-stone">"Letters from the atelier"</p>
                         <p class="font-serif text-ivory text-lg max-w-[36ch]">
-                            "Quattro lettere l'anno, scritte dall'atelier. Niente sconti, niente urgenza."
+                            "Four letters a year, written from the atelier. No discounts, no urgency."
                         </p>
                         <ActionForm action=action attr:class="flex flex-col sm:flex-row sm:items-end gap-4 mt-2">
                             <label class="flex-1 flex flex-col gap-2">
-                                <span class="tracker text-stone">"Indirizzo email"</span>
+                                <span class="tracker text-stone">"Email address"</span>
                                 <input
                                     type="email"
                                     name="email"
@@ -44,13 +44,13 @@ pub fn Footer() -> impl IntoView {
                                 disabled=move || pending.get()
                                 class="tracker text-ivory pb-3 hover:text-oxblood transition-colors duration-500 text-left disabled:opacity-50"
                             >
-                                {move || if pending.get() { "Invio…" } else { "Iscriviti →" }}
+                                {move || if pending.get() { "Sending…" } else { "Subscribe →" }}
                             </button>
                         </ActionForm>
                         {move || match value.get() {
                             Some(Ok(())) => view! {
                                 <p class="tracker text-stone mt-2">
-                                    "Grazie. Ti scriveremo dall'atelier."
+                                    "Thank you. We'll write from the atelier soon."
                                 </p>
                             }.into_any(),
                             Some(Err(e)) => view! {
@@ -75,7 +75,7 @@ pub fn Footer() -> impl IntoView {
 
                 <div class="pt-10 border-t border-rule flex flex-col sm:flex-row justify-between gap-4 tracker text-stone">
                     <p>"© MMXXVI Grand Omega Srl · P.IVA IT 01234567890"</p>
-                    <p>"Maître d'armes dal MDCCCXCVII"</p>
+                    <p>"Maître d'armes since MDCCCXCVII"</p>
                 </div>
             </div>
         </footer>
