@@ -12,6 +12,8 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
         with:
           targets: wasm32-unknown-unknown
-      - uses: taiki-e/install-action@cargo-leptos
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: cargo-leptos
       - run: cargo leptos build
       - run: cargo test --features ssr --no-default-features
